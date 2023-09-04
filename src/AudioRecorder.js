@@ -7,6 +7,10 @@ import MidiPlayer from "./components/views/MidiPlayer";
 import axios from "axios";
 
 const AudioRecorder = ({ isButtonClicked }) => {
+  const https = require("https");
+  const agent = new https.Agent({
+    rejectUnauthorized: false,
+  });
   const aRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -53,11 +57,13 @@ const AudioRecorder = ({ isButtonClicked }) => {
       console.log(formData["file"]);
       setIsLoading(true);
       // Make Axios POST request
+      //"http://15.164.61.1:65400/upload"
       axios
-        .post("http://15.164.61.1:65400/upload", formData, {
+        .post("/api", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          httpsAgent: agent,
         })
         .then((response) => {
           console.log(
