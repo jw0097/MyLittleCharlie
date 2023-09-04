@@ -54,7 +54,7 @@ const AudioRecorder = ({ isButtonClicked }) => {
       setIsLoading(true);
       // Make Axios POST request
       axios
-        .post("http://127.0.0.1:5000/upload", formData, {
+        .post("http://15.164.61.1:65400/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
